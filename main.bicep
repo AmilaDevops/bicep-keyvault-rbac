@@ -1,3 +1,6 @@
+@description('The name of the application which kv is creating for , value passing from the github actions workflow file.')
+param appName string
+
 @description('The target environment for this key vault.')
 param environment string = 'dev'
 
@@ -18,7 +21,7 @@ param enableSoftDelete bool = true
 param enablePurgeProtection bool = true
 
 var unique = take(uniqueString(resourceGroup().id), 5)
-var keyVaultName = toLower('kv-${keyVaultLocation}-${environment}-${unique}')
+var keyVaultName = toLower('kv-${appName}-${environment}-${unique}')
 
 /* resource keyValutRG 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   name: resourceGroupName
