@@ -2,20 +2,20 @@
 param appName string
 
 @description('The target environment for this key vault.')
-param environment string = 'dev'
+param environment string
 
 @description('Azure region used for the deployment of all resources.')
-param keyVaultLocation string = resourceGroup().location
+param keyVaultLocation string
 
 @description('Azure AD Tenant which existing  the User who executing resources deployment.')
-param tenantId string = '8d670cc5-4448-409a-8c12-0d6f237d0da0'
+param tenantId string
 
 @description('enable Azure RBAC to provide better control at the individual secret/certificate/key level.')
-param enableRbacAuthorization bool = true
+param enableRbacAuthorization bool 
 
-param softDeleteRetentionInDays int = 90
-param enableSoftDelete bool = true
-param enablePurgeProtection bool = true
+param softDeleteRetentionInDays int
+param enableSoftDelete bool
+param enablePurgeProtection bool
 
 var unique = take(uniqueString(resourceGroup().id), 5)
 var keyVaultName = toLower('kv-${appName}-${environment}-${unique}')
@@ -27,7 +27,6 @@ module keyVault './modules/keyvault.bicep' = {
     keyVaultName: keyVaultName
     keyVaultLocation: keyVaultLocation
     tenantId: tenantId
-    //principalId: principalId
     enableRbacAuthorization: enableRbacAuthorization
     softDeleteRetentionInDays: softDeleteRetentionInDays
     enableSoftDelete: enableSoftDelete
@@ -36,15 +35,6 @@ module keyVault './modules/keyvault.bicep' = {
   }
 }
 
-/*module mySecret 'services/keyvault-secret.bicep' = {
-  name: 'deploy-kv-${name}-secret-mysecret'
-  params: {
-    keyVaultName: keyVault.outputs.name
-    name: 'MySecret'
-    value: mySecretValue
-  }
-}
-*/
 
 output keyVaultResourceId string = keyVault.outputs.keyVaultId
 

@@ -34,12 +34,14 @@ resource managedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-
   location: keyVaultLocation
 }
 
+// get the built-in role Contributor
 @description('This is the built-in Contributor role. See https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#contributor')
 resource contributorRoleDefinition 'Microsoft.Authorization/roleDefinitions@2022-05-01-preview' existing = {
   scope: subscription()
   name: 'b24988ac-6180-42a0-ab88-20f7382dd24c'
 }
 
+// assign role contributor to the user-asigned manage identity in the scopr of keyVault resource
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(keyVault.id, managedIdentity.id, contributorRoleDefinition.id)
   scope: keyVault
