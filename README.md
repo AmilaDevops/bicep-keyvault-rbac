@@ -7,6 +7,7 @@ Also principalId is the id of the managed-identoty (user-assigned) I create and 
 
 
 <br />
+
 # Configure the GitHub Actions workflow pipeline to deploy resources into Azure
 ### Generate deployment credentials:    
 ##### Your GitHub Actions run under an identity. Use the az ad sp create-for-rbac command to create a service principal for the identity. Grant the service principal the contributor role for the resource group created in the previous session so that the GitHub action with the identity can create resources in this resource group. It is recommended that you grant minimum required access.
