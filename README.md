@@ -10,10 +10,10 @@ Also principalId is the id of the managed-identoty (user-assigned) I create and 
 
 # Configure the GitHub Actions workflow pipeline to deploy resources into Azure
 ### Generate deployment credentials:    
-Your GitHub Actions run under an identity. Use the az ad sp create-for-rbac command to create a service principal for the identity. Grant the service principal the contributor role for the resource group created in the previous session so that the GitHub action with the identity can create resources in this resource group. It is recommended that you grant minimum required access.
+Your GitHub Actions run under an identity. Use the az ad sp create-for-rbac command to create a service principal for the identity. Grant the service principal the contributor role for the resource group  or subscription as below, so that the GitHub action with the identity can create resources in this subscription. It is recommended that you grant minimum required access.
 `az ad sp create-for-rbac --name {app-name} --role owner --scopes /subscriptions/{subscription-id} --json-auth`
 
-### Configure the GitHub secrets
+### Configure the GitHub secrets for auth to azure
 Do setting in your Guthub account in path - Settings > Secrets and variables > Actions > New repository secret and add the out put of above step while creating the sp. As such { "clientId": "<GUID>",  "clientSecret": "<GUID>", "subscriptionId": "<GUID>", "tenantId": "<GUID>" ... }  and save the Repository Secret name as `AZURE_CREDENTIALS`
 
 
