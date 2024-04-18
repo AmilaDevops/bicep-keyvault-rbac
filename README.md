@@ -14,13 +14,16 @@ Your GitHub Actions run under an identity. Use the az ad sp create-for-rbac comm
 `az ad sp create-for-rbac --name {app-name} --role owner --scopes /subscriptions/{subscription-id} --json-auth`
 
 ### Configure the GitHub secrets
-Do setting in your Guthub account in path - Settings > Secrets and variables > Actions > New repository secret and add the out put of above step while creating the sp. As such { "clientId": "<GUID>",  "clientSecret": "<GUID>", "subscriptionId": "<GUID>", "tenantId": "<GUID>" ... }  and save the Repository Secret name as "AZURE_CREDENTIALS"
+Do setting in your Guthub account in path - Settings > Secrets and variables > Actions > New repository secret and add the out put of above step while creating the sp. As such { "clientId": "<GUID>",  "clientSecret": "<GUID>", "subscriptionId": "<GUID>", "tenantId": "<GUID>" ... }  and save the Repository Secret name as `AZURE_CREDENTIALS`
 
 
 <br />
 
-###  Steps for manual deployment:
+# Steps for manual deployment:
 To  deploy the Bicep file maually without using github actions (locally) to a new resource group use azure cli command - `az deployment group create --resource-group exampleRG --template-file main.bicep`
+
+
+~ author - Amila G
 
 
 
