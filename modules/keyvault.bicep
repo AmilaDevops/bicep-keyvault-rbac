@@ -1,16 +1,17 @@
 param environment string
 param keyVaultLocation string 
 param tenantId string
-param principalId string
+//param principalId string
 
 param enableRbacAuthorization bool
-param rbacRoleAssignments array
+//param rbacRoleAssignments array
 param keyVaultName string
 
 param softDeleteRetentionInDays int
 param enableSoftDelete bool
 param enablePurgeProtection bool
 
+var managedIdentityName = '${environment}-managed-identity-kv'
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: keyVaultName
@@ -49,14 +50,14 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
     principalType: 'ServicePrincipal'
   }
 }
- resource secret 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = {
+/* resource secret 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = {
   parent: kv
   name: secretName
   properties: {
     value: secretValue
   }
 }
-
+*/
 
 output keyVaultId string = keyVault.id
 
