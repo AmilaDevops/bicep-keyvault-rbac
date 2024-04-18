@@ -9,8 +9,12 @@ Also principalId is the id of the managed-identoty (user-assigned) I create and 
 <br />
 
 # Configure the GitHub Actions workflow pipeline to deploy resources into Azure
+Prerequisite steps before run the Github ci/cd auto deployment:
+
+### Create a Resource group 
+by using azure-cli  `az group ceate --name "R/G Name" --locaton "Azure reigion Name"`
 ### Generate deployment credentials:    
-Your GitHub Actions run under an identity. Use the az ad sp create-for-rbac command to create a service principal for the identity. Grant the service principal the contributor role for the resource group  or subscription as below, so that the GitHub action with the identity can create resources in this subscription. It is recommended that you grant minimum required access.
+Your GitHub Actions run under an identity. Use the az ad sp create-for-rbac command to create a service principal (app) for the identity. Grant the service principal the contributor role for the resource group  or subscription as below, so that the GitHub action with the identity can create resources in this subscription. It is recommended that you grant minimum required access.
 `az ad sp create-for-rbac --name {app-name} --role owner --scopes /subscriptions/{subscription-id} --json-auth`
 
 ### Configure the GitHub secrets for auth to azure
@@ -19,8 +23,9 @@ Do setting in your Guthub account in path - Settings > Secrets and variables > A
 
 <br />
 
-# Steps for manual deployment:
+# Steps for manual deployment locally:
 To  deploy the Bicep file maually without using github actions (locally) to a new resource group use azure cli command - `az deployment group create --resource-group exampleRG --template-file main.bicep`
+
 
 
 ~ author - Amila G
