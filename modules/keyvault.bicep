@@ -1,7 +1,6 @@
 param environment string
 param keyVaultLocation string 
 param tenantId string
-//param principalId string
 
 param enableRbacAuthorization bool
 //param rbacRoleAssignments array
