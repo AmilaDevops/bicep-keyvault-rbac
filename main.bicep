@@ -1,7 +1,3 @@
-
-/* @description('The Resource Group name for this module keyVault resources should create.')
-param resourceGroupName string = 'KvRg' */
-
 @description('The target environment for this key vault.')
 param environment string = 'dev'
 
