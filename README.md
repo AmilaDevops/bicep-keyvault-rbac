@@ -6,7 +6,7 @@ So in this repository by using bicep templates I creates a key vault and managed
 Also principalId is the id of the managed-identoty (user-assigned) I create and this is sometimes referred to as the object ID as well. In the resource roleAssignment we have to define principalType property, which specifies whether the principal is a user, a group, or a service principal. Managed identities are a form of service principal.<br />
 
 
-
+<br />
 # Configure the GitHub Actions workflow pipeline to deploy resources into Azure
 ### Generate deployment credentials:    
 ##### Your GitHub Actions run under an identity. Use the az ad sp create-for-rbac command to create a service principal for the identity. Grant the service principal the contributor role for the resource group created in the previous session so that the GitHub action with the identity can create resources in this resource group. It is recommended that you grant minimum required access.
