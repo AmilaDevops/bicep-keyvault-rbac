@@ -22,9 +22,20 @@ param enablePurgeProtection bool = true
 var unique = take(uniqueString(resourceGroup().id), 5)
 var keyVaultName = toLower('kv-${keyVaultLocation}-${environment}-${unique}')
 
-/* resource keyValutRG 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: resourceGroupName
-  //scope: subscriptionId
-  location: keyVaultLocation
+module keyVault './modules/keyvault.bicep' = {
+  name: 'keyVault-deployment'
+  params: {
+    environment: environment
+    keyVaultName: keyVaultName
+    keyVaultLocation: keyVaultLocation
+    tenantId: tenantId
+    //principalId: principalId
+    enableRbacAuthorization: enableRbacAuthorization
+    softDeleteRetentionInDays: softDeleteRetentionInDays
+    enableSoftDelete: enableSoftDelete
+    enablePurgeProtection: enablePurgeProtection
+   // rbacRoleAssignments: rbacRoleAssignments
+  }
 }
- */
+
+output keyVaultResourceId string = keyVault.outputs.keyVaultId
